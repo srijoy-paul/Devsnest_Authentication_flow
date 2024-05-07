@@ -39,19 +39,21 @@ export const userRouter = createTRPCRouter({
       try {
         const existingUser = await db.user.findUnique({
           where: {
-            email: input?.email,
+            email: input.email,
           },
         });
-        if (existingUser) return "User already exists";
+        console.log("existing user", existingUser);
+
+        if (existingUser) {
+          console.log("existing user");
+
+          return "User already exists";
+        }
 
         const otp = await generateOTP();
         ctx.otp = otp;
         ctx.currentUser = input;
         console.log("generated otp", otp);
-        // localStorage.setItem("otp", otp);
-        // const otpExpiryTime=addMinutes(new Date(),5);
-        // const otpExpiryTimeString=otpExpiryTime.toISOString();
-        // localStorage.setItem("otpExpireTime",otpExpiryTimeString)
 
         const options = {
           from: Sender_Email,
@@ -83,6 +85,19 @@ export const userRouter = createTRPCRouter({
 
       console.log("from verify", ctx.otp);
       if (ctx.otp === input.otp) {
+        const hashedPassword = await hashPassword(ctx.currentUser.password);
+        // ctx["userExtend"]=existingUser;
+
+        // console.log(hashedPassword);
+
+        const newUser = await db.user.create({
+          data: {
+            name: ctx.currentUser.name,
+            email: ctx.currentUser.email,
+            password: hashedPassword,
+          },
+        });
+        console.log("created user", newUser);
         console.log("Success");
         return "success";
       }

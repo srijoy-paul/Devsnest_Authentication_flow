@@ -8,6 +8,9 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
+      colors: {
+        offersbg: "#F4F4F4",
+      },
     },
   },
   plugins: [],
