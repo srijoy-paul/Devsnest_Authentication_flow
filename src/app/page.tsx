@@ -1,18 +1,18 @@
 import Link from "next/link";
-import { api } from "~/trpc/server";
+// import { api } from "~/trpc/server";
 
 export default async function Home() {
-  const hello = await api.auth.signup({
-    name: "Srijoy Paul",
-    email: "srijoypaul199@gmail.com",
-    password: "srijoy@1507",
-  });
-  console.log("from page", hello);
+  // const hello = await api.auth.signup({
+  //   name: "Srijoy Paul",
+  //   email: "srijoypaul199@gmail.com",
+  //   password: "srijoy@1507",
+  // });
+  // console.log("from page", hello);
 
-  const verified = await api.verify.verify({
-    otp: 432258,
-  });
-  console.log("from page verfiy", verified);
+  // const verified = await api.verify.verify({
+  //   otp: 432258,
+  // });
+  // console.log("from page verfiy", verified);
 
   //
   return (

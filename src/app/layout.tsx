@@ -1,10 +1,10 @@
+// "use client";
 import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import Navbar from "./_components/Navbar";
-import UserInfobar from "./_components/UserInfobar";
 import Offersbar from "./_components/Offersbar";
 
 const inter = Inter({
@@ -25,9 +25,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable} flex flex-col`}>
-        <Navbar />
-        <Offersbar />
+      <body className={`font-sans ${inter.variable} flex h-screen flex-col`}>
+        <div>
+          <Navbar />
+          <Offersbar />
+        </div>
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>

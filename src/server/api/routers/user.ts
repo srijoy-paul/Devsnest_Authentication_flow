@@ -10,7 +10,7 @@ import { Email_Subject, Sender_Email, transporter } from "../../Services/email";
 
 const prisma = new PrismaClient();
 
-const SignupInputSchema = z.object({
+export const SignupInputSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   password: z.string().min(6),
